@@ -1,0 +1,49 @@
+Portal: hacker3@OTAPRD122ops.onmicrosoft.com  Aza1(zn[1Re6
+Minecraft password: JpoOxI8nEf79Kvlu
+Minecraft key: T9H6H-C6K2F-V9W7R-X6Z6B-W9Z6B
+
+net use K: \\cs193d46c7e8316x4064x8c3.file.core.windows.net\cs-hacker3-otaprd122ops-onmicrosoft-com-1003bffdabae19e5 /u:AZURE\cs193d46c7e8316x4064x8c3 KrIydD/pbUfxnTKLnmAvZ/FOhSNJX5m+ybyd+h2dlWVSE9J3BrtftDsn5s565jdGmYz9WhNLJsaydlBUML89Kw==
+
+Challenge One - Local and ACS
+
+Win: docker run -m 2G -d -p 25565:25565 -e EULA=TRUE openhack/minecraft-server
+Linux: docker run -d -p 25565:25565 -e EULA=TRUE openhack/minecraft-server
+
+docker run -it --entrypoint /bin/bash -e EULA=TRUE openhack/minecraft-server 
+
+az group create -g minecraft-les -l westus
+az container create -g minecraft-les --name minecraft-les --image openhack/minecraft-server:1.0 --cpu 1 --memory 1 --ports 25565 -e EULA=TRUE --ip-address Public 
+
+
+
+az group delete -g minecraft-les -y
+
+Challenge Two - AKS
+
+az group create -g minecraft-aks-les -l eastus
+az aks create --resource-group minecraft-aks-les --name minecraft-aks-les --node-count 1 --generate-ssh-keys
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+
+https://static.brandonpotter.com/kubernetes/DeploymentBuilder.html
+
+
+Challenge three - production ready
+
+deploy arm template to add OMS and log analytics
+kubectl get ds omsagent --namespace=kube-system
+
+
+-- create storage
+
+
+
+
+
+
+
+
+
+
+
+
+
