@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Change these four parameters
-AKS_PERS_STORAGE_ACCOUNT_NAME=minecraftss2$RANDOM
+AKS_PERS_STORAGE_ACCOUNT_NAME=mcsspersiststorage
 AKS_PERS_RESOURCE_GROUP=minecraft-ss2
 AKS_PERS_LOCATION=eastus
-AKS_PERS_SHARE_NAME=aksshare
+AKS_PERS_SHARE_NAME=azurefile
+
+
+## Service princ from "other" RG
+## https://docs.microsoft.com/en-us/azure/aks/azure-files-volume
 
 # Create the Resource Group
 az group create --name $AKS_PERS_RESOURCE_GROUP --location $AKS_PERS_LOCATION
@@ -26,6 +30,7 @@ echo Storage account name: $AKS_PERS_STORAGE_ACCOUNT_NAME
 echo Storgae account key: $STORAGE_KEY
 
 
-#kubectl create secret generic azure-secret --from-literal=azurestorageaccountname=$AKS_PERS_STORAGE_ACCOUNT_NAME --from-literal=azurestorageaccountkey=$STORAGE_KEY
+kubectl create secret generic azure-secret --from-literal=azurestorageaccountname=$AKS_PERS_STORAGE_ACCOUNT_NAME --from-literal=azurestorageaccountkey=$STORAGE_KEY
 
+kubectl apply -f minecraft.yaml
 

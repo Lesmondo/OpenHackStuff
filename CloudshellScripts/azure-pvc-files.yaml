@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: minecraft-server
+spec:
+  containers:
+     - name: minecraft-server
+        image: openhack/minecraft-server:2.0
+      volumeMounts:
+      - mountPath: "/data"
+        name: volume
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: azurefile
